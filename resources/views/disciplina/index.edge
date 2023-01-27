@@ -1,0 +1,58 @@
+@layout('layouts/main')
+@set('titulo', 'SUAP')
+
+@section('sidebar')
+<ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('professor.index') }}">
+            <i class="bi bi-person"></i>
+            <span>Professores</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" collapsed href="{{ route('aluno.index') }}">
+            <i class="bi bi-person"></i>
+            <span>Alunos</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('disciplina.index') }}">
+            <i class="bi bi-journal-text"></i>
+            <span>Disciplinas</span>
+        </a>
+    </li>
+</ul>
+@end
+
+@section('main')
+<a href="{{route('disciplina.create')}}" class="text-success text-decoration-none">
+    <div class="d-grid gap-1">
+        <button class="btn text-white" type="button" style="background-color: #25a25a; border-radius: 25px;">Cadastrar disciplina</button>
+    </div>
+</a>
+<h1>Disciplinas cadastrados</h1>
+
+<div class="row">
+    @each (disciplina in disciplina)
+    <div class="card col-4 mb-3 mb-sm-0">
+        <div class="card-body">
+            NOME: {{disciplina.nome}}
+            <br>
+            DESCRIÇÃO: {{disciplina.descricao}}
+        </div>
+        <div class="text-center row">
+            <div class="col">
+                <a href="{{ route('disciplina.delete', { id: disciplina.id }) }}"><i class="fa-solid fa-trash" style="color: rgb(212, 68, 68)"></i></a>
+            </div>
+            <div class="col">
+                <a href="{{ route('disciplina.edit', { id: disciplina.id }) }}"><i class="fa-solid fa-user-pen"></i></a>
+            </div>
+        </div>
+    </div>
+    @end
+</div>
+
+@end

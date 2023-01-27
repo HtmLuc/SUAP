@@ -1,0 +1,56 @@
+@layout('layouts/main')
+@set('titulo', 'SUAP - Cadastro de aluno')
+
+@section('sidebar')
+<ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('professor.index') }}">
+            <i class="bi bi-person"></i>
+            <span>Professores</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('aluno.index') }}">
+            <i class="bi bi-person"></i>
+            <span>Alunos</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('disciplina.index') }}">
+            <i class="bi bi-journal-text"></i>
+            <span>Disciplinas</span>
+        </a>
+    </li>
+</ul>
+@end
+
+@section('main')
+<a href="{{route('aluno.create')}}" class="text-success text-decoration-none">
+    <div class="d-grid gap-1">
+        <button class="btn text-white" type="button" style="background-color: #25a25a; border-radius: 25px;">Cadastrar aluno</button>
+    </div>
+</a>
+<h1>Alunos cadastrados</h1>
+@each (aluno in aluno)
+<div class="row">
+    <div class="card col-4 mb-3 mb-sm-0">
+        <div class="card-body">
+            NOME: {{aluno.nome}}
+            <br>
+            MATRÍCULA: {{aluno.matricula}}
+        </div>
+        <div class="text-center row">
+            <div class="col">
+                <a href="{{ route('aluno.delete', { id: aluno.id }) }}"><i class="fa-solid fa-trash" style="color: rgb(212, 68, 68)"></i></a>
+            </div>
+            <div class="col">
+                <a href="{{ route('aluno.edit', { id: aluno.id }) }}"><i class="fa-solid fa-user-pen"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+@end
+@end
